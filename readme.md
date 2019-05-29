@@ -1,8 +1,8 @@
 ## Utilities by Python
 
-Version 0.1 by KzXuan
+by KzXuan
 
-
+</br>
 
 #### Display Tool ([display_tool.py](./display_tool.py))
 
