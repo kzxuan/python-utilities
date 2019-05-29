@@ -8,6 +8,8 @@ Version 0.1 by KzXuan
 
 * timer (计时器)
 
-<img src="./src/timer.gif" width=550 align='center'>
+<div align='center'>
+<img src="./src/timer.gif" width=550>
+</div>
 
 * dot (等待器)
