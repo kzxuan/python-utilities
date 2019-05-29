@@ -36,3 +36,12 @@ by KzXuan
   <img src="./src/table.gif" width=550>
   </div>
 
+</br>
+
+#### Predict Analysis ([predict_analysis.py](./predict_analysis.py))
+
+* Get all evaluation metrics, including Accuracy, macro/micro-P/R/F, based on real labels and classification prediction.
+
+  <div align='center'>
+  <img src="./src/prfacc.gif" width=550>
+  </div>
