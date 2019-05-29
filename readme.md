@@ -135,19 +135,16 @@ by KzXuan
   
   true = [1, 0, 1, 1, 2, 1, 0]
   pred = [0, 1, 1, 2, 2, 2, 1]
-  get = prfacc.analysis(true, pred, one_hot=False)
-  
-  # get:
+  get = prfacc.analysis(true, pred, one_hot=False, ndigits=4)
+  tab = prfacc.tabular(class_name=['pos', 'neu', 'neg'])
+  ## get:
   {
       'Acc': 0.2857, 'Correct': array([0, 1, 1]),
       'C0-P': 0.0, 'C1-P': 0.3333, 'C2-P': 0.3333, 'Mi-P': 0.2857, 'Ma-P': 0.2222,
       'C0-R': 0.0, 'C1-R': 0.25, 'C2-R': 1.0, 'Mi-R': 0.2857, 'Ma-R': 0.4167,
       'C0-F': 0.0, 'C1-F': 0.2857, 'C2-F': 0.5, 'Mi-F': 0.2857, 'Ma-F': 0.2898
   }
-  
-  tab = prfacc.tabular(class_name=['pos', 'neu', 'neg'])
-  
-  # tab:
+  ## tab:
             pos     neu     neg micro/avg macro/sum
   correct     0       1       1  0.666667         2
   predict     1       3       3   2.33333         7
@@ -158,4 +155,103 @@ by KzXuan
   accuracy                                   0.2857
   ```
 
+</br>
+
+#### Word Vector ([word_vector.py](./word_vector.py))
+
+* Load word embedding file and check a word.
+
+  ```python
+  import word_vector as wv
   
+  w2v = wv.load_w2v("./Glove_w2v.txt", type='txt', header=True, check_zero=True)
+  ## w2v["hello"]:
+  [ 3.4683e-01 -1.9612e-01 ... 8.2294e-02 -5.4478e-01]
+  ## w2v.index["hello"]:
+  1826
+  ```
+
+  <div align='center'>
+  <img src="./src/load_w2v.gif" width=550>
+  </div>
+
+* Simplify word embedding file with task word list.
+
+  ```python
+  words = ["hello", ..., "you"]
+  sim_w2v = wv.simplify_w2v(w2v, words, out_file="./task_w2v.txt", rand_not_in=False)
+  ```
+
+  <div align='center'>
+  <img src="./src/sim_w2v.gif" width=550>
+  </div>
+
+* Convert a text to vector, by mean/max value, joint connect or index query.
+
+  ```python
+  text = ["hello", "how", "are", "you", "."]
+  """Usage 1"""
+  vector = wv.text_vector(text, w2v, mode='mean')
+  ## vector:
+  [ 3.37970000e-01  1.61538168e-01 ... -1.16186400e-01  7.80512000e-02]
+  
+  """Usage 2"""
+  vector, length = wv.text_vector(text, w2v, mode='index', padding=10)
+  ## vector:
+  [ 2210  9327  6758 14882 15747     0     0     0     0     0]
+  ## length:
+  5
+  ```
+
+* Convert a document to matrix.
+
+  ```python
+  doc = [
+      ["hello", "how", "are", "you", "."],
+      ["I", "am", "fine", ",", "thank", "you", "."]
+  ]
+  """Usage 1"""
+  vector, doc_length = wv.doc_vector(doc, w2v, mode='max', padding=3)
+  
+  ## vector:
+  [[ 3.37970000e-01  1.61538168e-01 ... -1.16186400e-01  7.80512000e-02]
+   [ 7.40816667e-02  1.06451640e-01 ... -1.59695167e-01  1.59934333e-01]
+   [ 0.00000000e+00  0.00000000e+00 ...  0.00000000e+00  0.00000000e+00]]
+  ## doc_length:
+  2
+  
+  """Usage 2"""
+  vector, doc_length, sen_length = wv.doc_vector(doc, w2v, mode='index', padding=3)
+  ## vector:
+  [[ 2210.  9327.  6758. 14882. 15747.     0.     0.]
+   [14381. 12643. 37101. 13862. 14882. 15747.     0.]
+   [    0.     0.     0.     0.     0.     0.     0.]]
+  ## doc_length:
+  2
+  ## sen_length:
+  [5 6 0]
+  ```
+
+</br>
+
+#### Easy Function ([easy_function.py](./easy_function.py))
+
+* Get one-hot epression of labels.
+
+  ```python
+  from easy_function import one_hot
+  
+  label = [0, 1, 2, 2, 0, 1]
+  oh = one_hot(label)
+  
+  ## oh:
+  [[1 0 0]
+   [0 1 0]
+   [0 0 1]
+   [0 0 1]
+   [1 0 0]
+   [0 1 0]]
+  ```
+
+  
+
