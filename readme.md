@@ -146,9 +146,9 @@ by KzXuan
   }
   ## tab:
             pos     neu     neg micro/avg macro/sum
-  correct     0       1       1  0.666667         2
-  predict     1       3       3   2.33333         7
-  label       2       4       1   2.33333         7
+  correct     0       1       1    0.6667         2
+  predict     1       3       3    2.3333         7
+  label       2       4       1    2.3333         7
   precision   0  0.3333  0.3333    0.2857    0.2222
   recall      0    0.25       1    0.2857    0.4167
   f1-score    0  0.2857     0.5    0.2857    0.2898
