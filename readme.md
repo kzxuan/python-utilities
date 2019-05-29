@@ -13,3 +13,21 @@ Version 0.1 by KzXuan
 </div>
 
 * dot (等待器)
+
+<div align='center'>
+<img src="./src/dot.gif" width=550>
+</div>
+
+* slash (闪烁器)
+
+  <div align='center'>
+  <img src="./src/slash.gif" width=550>
+  </div>
+
+* bar (进度条)
+
+  <div align='center'>
+  <img src="./src/bar.gif" width=550>
+  </div>
+
+  
