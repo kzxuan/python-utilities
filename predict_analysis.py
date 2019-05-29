@@ -40,13 +40,14 @@ class prfacc(object):
         # all class statistic
         cls.true_class = np.array([np.sum(cls.true == i) for i in range(cls.n_class)])
         cls.pred_class = np.array([np.sum(cls.pred == i) for i in range(cls.n_class)])
-        true_pred = true[np.argwhere((true == pred) == True).flatten()]
+
+        true_pred = cls.true[np.argwhere((cls.true == cls.pred) == True).flatten().astype(int)]
         cls.true_pred = np.array([np.sum(true_pred == i) for i in range(cls.n_class)])
 
         # add mean value for micro
-        cls.true_class = np.append(cls.true_class, np.mean(cls.true_class))
-        cls.pred_class = np.append(cls.pred_class, np.mean(cls.pred_class))
-        cls.true_pred = np.append(cls.true_pred, np.mean(cls.true_pred))
+        cls.true_class = np.append(cls.true_class, round(np.mean(cls.true_class), ndigits))
+        cls.pred_class = np.append(cls.pred_class, round(np.mean(cls.pred_class), ndigits))
+        cls.true_pred = np.append(cls.true_pred, round(np.mean(cls.true_pred), ndigits))
 
         # calculate class and micro prf
         cls.precision = np.round(np.nan_to_num(cls.true_pred / cls.pred_class, 0), ndigits)
