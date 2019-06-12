@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Predict data analysis
-Last update: KzXuan, 2019.05.28
+Last update: KzXuan, 2019.06.11
 """
 import numpy as np
 import pandas as pd
@@ -68,10 +68,10 @@ class prfacc(object):
         cls.recall = np.append(cls.recall, round(macro_r, ndigits))
         cls.f1 = np.append(cls.f1, round(np.nan_to_num((2. * macro_p * macro_r) / (macro_p + macro_r), 0), ndigits))
 
-        cls.results = {"Acc": cls.accuracy, "Correct": cls.true_pred[:-2].astype(int)}
-        cls.results.update(**{"{}-P".format(col[i]): cls.precision[i] for i in range(len(col))})
-        cls.results.update(**{"{}-R".format(col[i]): cls.recall[i] for i in range(len(col))})
-        cls.results.update(**{"{}-F".format(col[i]): cls.f1[i] for i in range(len(col))})
+        cls.results = {"Acc": float(cls.accuracy), "Correct": cls.true_pred[:-2].astype(int)}
+        cls.results.update({"{}-P".format(col[i]): float(cls.precision[i]) for i in range(len(col))})
+        cls.results.update({"{}-R".format(col[i]): float(cls.recall[i]) for i in range(len(col))})
+        cls.results.update({"{}-F".format(col[i]): float(cls.f1[i]) for i in range(len(col))})
 
         return cls.results
 
