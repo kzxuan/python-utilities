@@ -145,11 +145,11 @@ def time_str_stamp(str_time, form="%a %b %d %H:%M:%S %z %Y"):
 
 def one_hot(arr, n_class=0, padding=0):
     """
-    Change labels to one hot expression
+    Change labels to one-hot expression
     * arr [np.array]: numpy array
     * n_class [int]: number of class
     * padding [int]: padding size
-    - oh [np.array]: numpy array with one hot expression
+    - oh [np.array]: numpy array with one-hot expression
     """
     import numpy as np
     if arr is None:
