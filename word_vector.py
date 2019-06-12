@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 """
 Functions for word embedding operation
-Last update: KzXuan, 2019.05.28
+Last update: KzXuan, 2019.06.12
 """
 import numpy as np
 import codecs as cs
-from new_display_tool import bar, dot
+from display_tool import bar, dot
 from collections import OrderedDict
 
 
