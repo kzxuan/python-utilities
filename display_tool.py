@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Some tools for optimizing output
-Last update: KzXuan, 2019.05.27
+Last update: KzXuan, 2019.05.30
 """
 import os
 import sys
@@ -201,7 +201,7 @@ class dot(wait):
 def bar(_list, desc=None, leave=True, visible=1):
     """
     Print progress bar and time in a loop
-    * _list [int/list]: a list for loop
+    * _list [int/list/dict/set/range]: a list for loop
     * desc [str]: a description string
     * leave [bool]: leave the bar or not after loop
     """
@@ -213,10 +213,12 @@ def bar(_list, desc=None, leave=True, visible=1):
 
     if isinstance(_list, int):
         _list = list(range(_list))
-    if isinstance(_list, dict):
+    elif isinstance(_list, dict):
         _list = list(_list.items())
-    if not isinstance(_list, list):
-        raise TypeError("Type error of '_list', want int/list, get {}.".format(type(_list)))
+    elif isinstance(_list, set) or isinstance(_list, range):
+        _list = list(_list)
+    else:
+        raise TypeError("Type error of '_list', want int/list/dict/set/range, get {}.".format(type(_list)))
 
     for i in tqdm.tqdm(_list, desc=desc, leave=leave, ncols=ncols, ascii=True, bar_format=bar_format):
         yield i
